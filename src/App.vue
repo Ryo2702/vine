@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import RightVine from './components/DecorativeVine/RightVine.vue'
+import LeftVine from './components/DecorativeVine/LeftVine.vue'
 </script>
 
-<template><main aria-label="Animated botanical ornament"><RightVine /></main></template>
+<template><main aria-label="Animated botanical ornament"><LeftVine /></main></template>
 
 <style>
 * { box-sizing: border-box; }

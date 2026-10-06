@@ -9,7 +9,7 @@ useVineEnvironment(host, ambient)
 </script>
 
 <template>
-  <div ref="host" class="right-vine" aria-hidden="true">
+  <div ref="host" class="decorative-vine right-vine" aria-hidden="true">
     <svg viewBox="0 0 1200 460" xmlns="http://www.w3.org/2000/svg" focusable="false">
       <g class="linework">
         <circle data-root cx="42" cy="272" r="2" />
@@ -49,13 +49,4 @@ useVineEnvironment(host, ambient)
   </div>
 </template>
 
-<style scoped>
-.right-vine { position: relative; width: 100%; max-width: 1440px; aspect-ratio: 1200 / 460; color: var(--vine-color, #68b947); isolation: isolate; }
-svg { position: relative; z-index: 1; display: block; width: 100%; height: 100%; overflow: visible; visibility: hidden; }
-.linework { fill: none; stroke: currentColor; stroke-width: 1.05; stroke-linecap: round; stroke-linejoin: round; }
-.linework :is(path, circle) { vector-effect: non-scaling-stroke; }
-[data-name^="tendril"], [data-details] { stroke-width: .8; }
-[data-root], [data-details] circle { fill: currentColor; stroke: none; }
-.right-vine :deep(canvas) { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-@media (prefers-reduced-motion: reduce) { svg { visibility: visible; } }
-</style>
+<style scoped src="./vine.css"></style>
