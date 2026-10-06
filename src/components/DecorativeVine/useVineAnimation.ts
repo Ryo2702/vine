@@ -15,7 +15,7 @@ function attachment(path: SVGPathElement, x: number, y: number) {
   return { fraction: distance / length, point: path.getPointAtLength(distance) }
 }
 
-export function useVineAnimation(host: Ref<HTMLElement | null>) {
+export function useVineAnimation(host: Ref<HTMLElement | null>, playbackRate = 1) {
   const finished = ref(false)
   const visible = ref(false)
   const reduced = ref(false)
@@ -44,6 +44,7 @@ export function useVineAnimation(host: Ref<HTMLElement | null>) {
       const leaves = [...element.querySelectorAll<SVGGElement>('[data-leaf]')]
       const schedule = new Map<string, { path: SVGPathElement; start: number; duration: number }>()
       timeline = gsap.timeline({ paused: true, onComplete: () => { finished.value = true; sync() } })
+      timeline.timeScale(playbackRate)
       gsap.set('[data-root], [data-details]', { opacity: 0 })
       timeline.to('[data-root]', { opacity: 1, duration: .35 }, 0)
 
@@ -70,7 +71,7 @@ export function useVineAnimation(host: Ref<HTMLElement | null>) {
         gsap.set(leaf, { x: point.x - x, y: point.y - y, svgOrigin: `${x} ${y}`, scale: .12, rotation: -12, opacity: 0 })
         timeline.to(leaf, { scale: 1, rotation: 0, opacity: 1, duration: 1.5, ease: 'sine.out' }, parent.start + parent.duration * fraction + .2)
       }
-      timeline.to('[data-details]', { opacity: 1, duration: 1.6, ease: 'sine.inOut' }, '>-.2')
+      timeline.to('[data-details]', { opacity: 1, duration: 1.6, ease: 'sine.inOut' }, timeline.duration())
     }, element)
 
     function sync() {
